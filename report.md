@@ -13,7 +13,7 @@ Cyclistic, a bike-share company in Chicago that features more than 5,800 bicycle
 **Objective:**
 
   •	Understand how annual members and casual riders use Cyclistic bikes differently.
-
+  
   •	Create digital marketing strategies aimed at converting casual riders into Cyclistic members.
 
 **Data Analysis Process**
@@ -324,14 +324,14 @@ Members take significantly more rides than casual users, reflecting their freque
 --Count the different ride types and percentage of distribution for both the member and casual riders
 WITH total_counts AS (
     SELECT COUNT(ride_id) AS total_ride_count
-    FROM coursera-sql2024.cyclistic_data.alldatacleaned_trip_data
+    FROM alldatacleaned_trip_data
 )
 SELECT 
     member_casual,
     rideable_type,
     COUNT(ride_id) AS ride_count,
     COUNT(ride_id) / (SELECT total_ride_count FROM total_counts) * 100 AS ride_percentage
-FROM coursera-sql2024.cyclistic_data.alldatacleaned_trip_data
+FROM calldatacleaned_trip_data
 GROUP BY member_casual,
     rideable_type
 ORDER BY member_casual DESC, rideable_type;
@@ -355,7 +355,7 @@ Members take more rides overall, reflecting frequent, short trips, while casual 
 SELECT member_casual,
   COUNT(ride_length_minutes) AS total_rides,
   COUNT(CASE WHEN ride_length_minutes <= 30 THEN ride_length_minutes END) AS halfanhour_orless, 
-  COUNT(CASE WHEN ride_length_minutes > 30 AND ride_length_minutes <= 60 THEN ride_length_minutes END) AS between_1hour_and_30min, 
+  COUNT(CASE WHEN ride_length_minutes > 30 AND ride_length_minutes <= 60 THEN ride_length_minutes END) AS between_30min_and_1hr, 
   COUNT(CASE WHEN ride_length_minutes > 60 AND ride_length_minutes <= 120 THEN ride_length_minutes END) AS between_1hour_and_2hr,
   COUNT(CASE WHEN ride_length_minutes > 120 THEN ride_length_minutes END) AS greater_than_2hr,
 FROM alldatacleaned_trip_data
@@ -363,8 +363,8 @@ GROUP BY member_casual
 ORDER BY member_casual DESC;
 ```
 
-|total_rides| halfanhour_orless| between_1hour_and_30min| between_1hour_and_2hr| greater_than_2hr |
-|---------|--------|----------|---------------|-----------|
+| member_casual |total_rides| halfanhour_orless| between_30min_and_1hr| between_1hour_and_2hr| greater_than_2hr |
+|---------|--------|----------|---------------|-----------|-----------|
 |member| 3424975| 3239353| 164823| 14933| 5866|
 |casual| 1899303| 1565828| 218060| 87836| 27579|
 
@@ -379,9 +379,9 @@ Users ride more frequently on weekends and during the summer months, driven by f
 **Step 6: Act**
 
 Based on the findings from my analysis, I would like to share my insights and provide recommendations Cyclistic’s marketing strategies to convert casual riders to annual members:
-1.	Promote Membership Benefits - Launch targeted campaigns emphasizing the cost savings, convenience, and exclusive perks of annual memberships, particularly for frequent casual riders.
-2.	Focus on Peak Usage Times - Align marketing and operational resources with peak times, such as weekends and summer months. Offer seasonal promotions or weekend-specific membership deals to capture the interest of casual users during high activity periods.
-3.	Enhance User Experience for Casual Riders - Simplify the process of upgrading to an annual membership through the app or website. Provide real-time comparisons showing the cost-effectiveness of memberships after multiple casual rides to encourage conversion.
+1.	**Promote Membership Benefits** - Launch targeted campaigns emphasizing the cost savings, convenience, and exclusive perks of annual memberships, particularly for frequent casual riders.  Launch campaigns at high volume stations. 
+2.	**Focus on Peak Usage Times** - Align marketing and operational resources with peak times, such as weekends and summer months. Offer seasonal promotions or weekend-specific membership deals to capture the interest of casual users during high activity periods. 
+3.	**Enhance User Experience for Casual Riders** - Simplify the process of upgrading to an annual membership through the app or website. Provide real-time comparisons showing the cost-effectiveness of memberships after multiple casual rides to encourage conversion.
 
 
 
