@@ -283,7 +283,9 @@ I will analyze the data to uncover key insights by comparing ride patterns betwe
 
 My data visualizations can be found on tableau public [here.]( https://public.tableau.com/app/profile/marvin.gomez1953/viz/CylisticData/Story1)
 
-Both casual users and members predominantly use Cyclistic bikes within the Chicago area, indicating that their geographical usage patterns are largely similar
+Firstly, both casual users and members predominantly use Cyclistic bikes within the Chicago area, indicating that their geographical usage patterns are largely similar.
+
+
 
 
 
