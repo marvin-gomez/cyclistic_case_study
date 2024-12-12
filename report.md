@@ -285,6 +285,38 @@ My data visualizations can be found on tableau public [here.]( https://public.ta
 
 Firstly, both casual users and members predominantly use Cyclistic bikes within the Chicago area, indicating that their geographical usage patterns are largely similar.
 
+![](https://github.com/mgomez024/cyclistic_case_study/blob/main/Data%20visuals/heatmap.jpg)
+
+Here are the top three most frequently used stations, showcasing their popularity as key hubs for both casual users and members.
+
+```sql
+--Find the top three station names for both the member and casual riders
+WITH station_counts AS 
+  (
+  SELECT member_casual, start_station_name, COUNT(ride_id) as ride_count
+  FROM alldatacleaned_trip_data
+  WHERE start_station_name IS NOT NULL
+  GROUP BY member_casual, start_station_name
+  ),
+rank_stations AS 
+  (
+  SELECT member_casual, start_station_name, ride_count,RANK() OVER(PARTITION BY member_casual ORDER BY ride_count DESC) AS station_rank
+  FROM station_counts
+  )
+SELECT member_casual, start_station_name, ride_count
+FROM rank_stations
+WHERE station_rank <=3
+ORDER BY member_casual DESC, station_rank;
+```
+
+|member_casual|start_station_name|ride_count|
+|---------------------|--------------------------|---------------|
+|member |Kingsbury St & Kinzie St | 28997|
+|member |Clinton St & Washington Blvd |28069 |
+|member | Clinton St & Madison St | 24705|
+|casual | Streeter Dr & Grand Ave | 50135|
+|casual |DuSable Lake Shore Dr & Monroe St| 33533|
+|casual |Michigan Ave & Oak St |24842 |
 
 
 
