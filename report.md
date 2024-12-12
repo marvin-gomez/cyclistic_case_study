@@ -346,7 +346,7 @@ ORDER BY member_casual DESC, rideable_type;
 |casual| electric_bike| 869542| 16.33% |
 |casual| electric_scooter| 54487| 1.02 %|
 
-![](https://github.com/mgomez024/cyclistic_case_study/blob/main/Data%20visuals/piechart_ridetype.jpg)
+![](https://github.com/marvin-gomez/cyclistic_case_study/blob/a1843e5bd56a0455ac3abb4b4a955ca9987c791b/Data%20visuals/pie_ridetype.jpg)
 
 Members take more rides overall, reflecting frequent, short trips, while casual riders average longer durations per ride, suggesting a preference for extended leisure or exploratory use. 
 
