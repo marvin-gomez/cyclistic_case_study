@@ -318,7 +318,70 @@ ORDER BY member_casual DESC, station_rank;
 |casual |DuSable Lake Shore Dr & Monroe St| 33533|
 |casual |Michigan Ave & Oak St |24842 |
 
+Members take significantly more rides than casual users, reflecting their frequent and consistent use of the service. They primarily prefer classic bikes, highlighting a focus on practical and reliable trips. Casual users, with fewer rides overall, show a balanced preference for classic bikes, electric bikes, and scooters, favoring electric options for leisure and occasional use.
 
+```sql
+--Count the different ride types and percentage of distribution for both the member and casual riders
+WITH total_counts AS (
+    SELECT COUNT(ride_id) AS total_ride_count
+    FROM coursera-sql2024.cyclistic_data.alldatacleaned_trip_data
+)
+SELECT 
+    member_casual,
+    rideable_type,
+    COUNT(ride_id) AS ride_count,
+    COUNT(ride_id) / (SELECT total_ride_count FROM total_counts) * 100 AS ride_percentage
+FROM coursera-sql2024.cyclistic_data.alldatacleaned_trip_data
+GROUP BY member_casual,
+    rideable_type
+ORDER BY member_casual DESC, rideable_type;
+```
+
+|member_casual| rideable_type| ride_count| ride_percentage |
+|---------------------|--------------------|----------------|--------|
+|member| classic_bike| 1797556| 33.76% |
+|member| electric_bike| 1582742| 29.73.% |
+|member| electric_scooter| 44677| 0.84%|
+|casual| classic_bike| 975274| 18.32% |
+|casual| electric_bike| 869542| 16.33% |
+|casual| electric_scooter| 54487| 1.02 %|
+
+![](https://github.com/mgomez024/cyclistic_case_study/blob/main/Data%20visuals/piechart_ridetype.jpg)
+
+Members take more rides overall, reflecting frequent, short trips, while casual riders average longer durations per ride, suggesting a preference for extended leisure or exploratory use. 
+
+```sql
+--Find the utilization count for members and casual riders across different ride lengths 
+SELECT member_casual,
+  COUNT(ride_length_minutes) AS total_rides,
+  COUNT(CASE WHEN ride_length_minutes <= 30 THEN ride_length_minutes END) AS halfanhour_orless, 
+  COUNT(CASE WHEN ride_length_minutes > 30 AND ride_length_minutes <= 60 THEN ride_length_minutes END) AS between_1hour_and_30min, 
+  COUNT(CASE WHEN ride_length_minutes > 60 AND ride_length_minutes <= 120 THEN ride_length_minutes END) AS between_1hour_and_2hr,
+  COUNT(CASE WHEN ride_length_minutes > 120 THEN ride_length_minutes END) AS greater_than_2hr,
+FROM alldatacleaned_trip_data
+GROUP BY member_casual
+ORDER BY member_casual DESC;
+```
+
+|total_rides| halfanhour_orless| between_1hour_and_30min| between_1hour_and_2hr| greater_than_2hr |
+|---------|--------|----------|---------------|-----------|
+|member| 3424975| 3239353| 164823| 14933| 5866|
+|casual| 1899303| 1565828| 218060| 87836| 27579|
+
+Users ride more frequently on weekends and during the summer months, driven by favorable weather and leisure activities. Casual riders see a significant increase on weekends, likely due to recreational trips and tourism. Members also show higher usage during these times, though their riding patterns remain more consistent, balancing leisure and utility.
+
+![](https://github.com/mgomez024/cyclistic_case_study/blob/main/Data%20visuals/bar_monthly.jpg)
+
+![](https://github.com/mgomez024/cyclistic_case_study/blob/main/Data%20visuals/bar_daily.jpg)
+
+Users ride more frequently on weekends and during the summer months, driven by favorable weather and leisure activities. Casual riders see a significant increase on weekends, likely due to recreational trips and tourism. Members also show higher usage during these times, though their riding patterns remain more consistent, balancing leisure and utility.
+
+**Step 6: Act**
+
+Based on the findings from my analysis, I would like to share my insights and provide recommendations Cyclistic’s marketing strategies to convert casual riders to annual members:
+1.	Promote Membership Benefits - Launch targeted campaigns emphasizing the cost savings, convenience, and exclusive perks of annual memberships, particularly for frequent casual riders.
+2.	Focus on Peak Usage Times - Align marketing and operational resources with peak times, such as weekends and summer months. Offer seasonal promotions or weekend-specific membership deals to capture the interest of casual users during high activity periods.
+3.	Enhance User Experience for Casual Riders - Simplify the process of upgrading to an annual membership through the app or website. Provide real-time comparisons showing the cost-effectiveness of memberships after multiple casual rides to encourage conversion.
 
 
 
