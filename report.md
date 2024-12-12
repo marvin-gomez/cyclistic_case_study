@@ -42,19 +42,21 @@ The data that I will be using is Cyclistic’s historical trip data.  The data u
 
 For this case study, the datasets I have chosen for analysis cover a 12 month period from November 2023 to October 2024.  All trip data is in a comma-delimited (.CSV) format with 13 columns including:
 
-1.	ride_id - Unique identifier for each ride booking
-2.	rideable_type - Type of bicycle used
-3.	started_at - Date and time of the start of the ride
-4.	ended_at - Date and time of the end of the ride
-5.	start_station_name - Name of the starting station
-6.	start_station_id - ID of the starting station
-7.	end_station_name - Name of the end station
-8.	end_station_id - ID of the end station
-9.	start_lat - Latitude of the start station
-10.	start_lng - Longitude of the start station
-11.	end_lat - Latitude of the end station
-12.	end_lng - Longitude of the end station
-13.	member_casual - User type
+|Column #|Column Name|Data Tye|Description|
+|-----|---------------|----------|------------------|
+|1 |ride_id|STRING|	Unique identifier for each ride booking|
+|2|	rideable_type	|STRING|	Type of bicycle used |
+|3|	started_at	|TIMESTAMP	|Date and time of the start of the ride|
+|4|	ended_at	|TIMESTAMP|	Date and time of the end of the ride|
+|5|	start_station_name	|STRING|	Name of the starting station|
+|6|	start_station_id	|STRING|	ID of the starting station|
+|7|	end_station_name|	STRING|	Name of the end station|
+|8|	end_station_id	|STRING|	ID of the end station|
+|9|	start_lat	|FLOAT	|Latitude of the start station|
+|10|	start_lng	|FLOAT|	Longitude of the start station|
+|11|	end_lat	|FLOAT	|Latitude of the end station|
+|12|	end_lng	|FLOAT|	Longitude of the end station|
+|13|	member_casual|	STRING|	User type|
 
 **Step 3: Process**
 
@@ -274,6 +276,8 @@ SELECT ride_id,
 FROM alldata_trip_data_v2
 );
 ```
+
+
 
 
 
