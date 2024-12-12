@@ -277,7 +277,13 @@ FROM alldata_trip_data_v2
 );
 ```
 
+**Step 4&5: Analyze & Share**
 
+I will analyze the data to uncover key insights by comparing ride patterns between members and casual users, identifying trends in ride durations, popular bike types, and frequently used stations. Using statistical analysis and visualizations, I will highlight significant differences and correlations that inform user behavior.
+
+My data visualizations can be found on tableau public [here.]( https://public.tableau.com/app/profile/marvin.gomez1953/viz/CylisticData/Story1)
+
+Both casual users and members predominantly use Cyclistic bikes within the Chicago area, indicating that their geographical usage patterns are largely similar
 
 
 
